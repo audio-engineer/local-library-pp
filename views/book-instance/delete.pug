@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  h1= title
+
+  p #[strong Do you really want to delete this BookInstance?]
+
+  div(style="margin-left: 20px")
+    p #[strong ID]: #{ bookInstance._id }
+
+    p #[strong Title:]
+      a(href=bookInstance.book.url) #{ bookInstance.book.title }
+
+    p #[strong Imprint:] #{ bookInstance.imprint }
+
+    p #[strong Status:]
+      if 'Available' === bookInstance.status
+        span.text-success #{ bookInstance.status }
+      else if 'Maintenance' === bookInstance.status
+        span.text-danger #{ bookInstance.status }
+      else
+        span.text-warning #{ bookInstance.status }
+
+    if 'Available' !== bookInstance.status
+      p #[strong Due back:] #{ bookInstance.dueBackFormatted }
+
+  form(method="POST")
+    .form-group
+      input#id.form-control(type="hidden", name="id", value=bookInstance._id)
+
+    button.btn.btn-primary(type="submit") Delete

@@ -1,0 +1,11 @@
+mixin table(columns, rows)
+  if columns.length && rows.length
+  table.table.table-hover
+    thead
+      tr
+      each column in columns
+        th #{ column.name }
+    tbody
+    each row in rows
+      tr
+        td #{ row.data }

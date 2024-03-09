@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+
+import app from "../app";
+import debug from "debug";
+import http from "http";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const Debug = debug("hello");
+
+const normalizePort = (val) => {
+  const port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    return val;
+  }
+
+  if (0 <= port) {
+    return port;
+  }
+
+  return false;
+};
+
+const port = normalizePort(process.env.PORT || "3000");
+
+app.set("port", port);
+
+const server = http.createServer(app);
+
+server.listen(port);
+
+const onError = (error) => {
+  if ("listen" !== error.syscall) {
+    throw error;
+  }
+
+  let bind;
+
+  if ("string" === typeof port) {
+    bind = "Pipe " + port;
+  } else {
+    bind = "Port " + port;
+  }
+
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+};
+
+server.on("error", onError);
+
+const onListening = () => {
+  const addr = server.address();
+  let bind;
+
+  if ("string" === typeof addr) {
+    bind = "pipe " + addr;
+  } else {
+    bind = "port " + addr.port;
+  }
+
+  Debug("Listening on " + bind);
+};
+
+server.on("listening", onListening);
