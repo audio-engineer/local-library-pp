@@ -44,7 +44,7 @@ const bookInstanceSchema = new Schema<IBookInstanceDocument>({
 bookInstanceSchema.virtual("url").get(function (
   this: IBookInstanceBaseDocument,
 ) {
-  return "/catalog/book-instance/" + this._id;
+  return "/catalog/copies/" + this._id;
 });
 
 bookInstanceSchema.virtual("dueBackLocaleString").get(function (

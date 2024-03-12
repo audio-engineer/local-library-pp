@@ -8,7 +8,7 @@ import type { NextFunction, Request, Response } from "express";
 import path from "path";
 import { HttpStatusError } from "@/helper/index.js";
 
-const bookInstanceViewDirectory = "book-instance";
+const bookInstanceViewDirectory = "copies";
 
 /**
  *
@@ -122,7 +122,7 @@ export const bookInstanceDeleteGet = asyncHandler(
       .exec();
 
     if (!bookInstanceObject) {
-      res.redirect("/catalog/book-instances");
+      res.redirect("/catalog/copies");
     }
 
     res.render(path.join(bookInstanceViewDirectory, "delete"), {
@@ -138,7 +138,7 @@ export const bookInstanceDeleteGet = asyncHandler(
 export const bookInstanceDeletePost = asyncHandler(
   async (req: Request, res: Response) => {
     await copy.findByIdAndDelete(req.body.id);
-    res.redirect("/catalog/book-instances");
+    res.redirect("/catalog/copies");
   },
 );
 

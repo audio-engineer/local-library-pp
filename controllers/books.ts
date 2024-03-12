@@ -13,59 +13,33 @@ import { HttpStatusError } from "@/helper/index.js";
 const bookViewDirectory = "book";
 
 /**
- * Book GET requests.
- */
-export const bookIndex = asyncHandler(async (req: Request, res: Response) => {
-  res.render("index", {
-    title: getFullPageTitle("Home"),
-    bookCount: await book.countDocuments({}).exec(),
-    bookInstanceCount: await copy.countDocuments({}).exec(),
-    bookInstanceAvailableCount: await copy
-      .countDocuments({ status: "Available" })
-      .exec(),
-    authorCount: await author.countDocuments({}).exec(),
-    genreCount: await genre.countDocuments({}).exec(),
-  });
-});
-
-/**
  *
  */
-export const bookList = asyncHandler(async (req: Request, res: Response) => {
-  const allBooks = await book
-    .find({}, "title author")
-    .sort({ title: 1 })
-    .populate("author")
-    .exec();
-
-  res.render(path.join(bookViewDirectory, "list"), {
-    title: getFullPageTitle("Book List"),
-    bookList: allBooks,
-  });
-});
-
-/**
- *
- */
-export const bookDetail = asyncHandler(
+export const getBooks = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const [bookObject, bookInstances] = await Promise.all([
-      book.findById(req.params.id).populate("author").populate("genre").exec(),
-      copy.find({ book: req.params.id }).exec(),
-    ]);
+    const response = await fetch("http://localhost:3000/v1/books");
+    const bookObjectJson = await response.json();
 
-    if (!bookObject) {
-      const err = new HttpStatusError(StatusCodes.NOT_FOUND, "Book not found");
+    res.render(path.join(bookViewDirectory, "list"), {
+      title: "More Stuff",
+      ...bookObjectJson,
+    });
+  },
+);
 
-      next(err);
-
-      return;
-    }
+/**
+ *
+ */
+export const getBookById = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const response = await fetch(
+      `http://localhost:3000/v1/books/${req.params.id}`,
+    );
+    const bookObjectJson = await response.json();
 
     res.render(path.join(bookViewDirectory, "detail"), {
-      title: getFullPageTitle(bookObject.title),
-      book: bookObject,
-      bookInstances: bookInstances,
+      title: "Stuff",
+      ...bookObjectJson,
     });
   },
 );

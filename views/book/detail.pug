@@ -13,19 +13,19 @@ block content
         | ,&nbsp;
   div(style="margin-left: 20px; margin-top: 20px")
     h4 Copies
-    each copy in bookInstances
+    each copy in copies
       hr
-      if 'Available' === bookInstance.status
-        p.text-success #{ bookInstance.status }
-      else if 'Maintenance' === bookInstance.status
-        p.text-danger #{ bookInstance.status }
+      if 'Available' === copy.status
+        p.text-success #{ copy.status }
+      else if 'Maintenance' === copy.status
+        p.text-danger #{ copy.status }
       else
-        p.text-warning #{ bookInstance.status }
-      p #[strong Imprint:] #{ bookInstance.imprint }
-      if 'Available' !== bookInstance.status
-        p #[strong Due back:] #{ bookInstance.dueBack }
+        p.text-warning #{ copy.status }
+      p #[strong Imprint:] #{ copy.imprint }
+      if 'Available' !== copy.status
+        p #[strong Due back:] #{ copy.dueBack }
       p #[strong Id:]
-        a(href=bookInstance.url) #{ bookInstance._id }
+        a(href=copy.url) #{ copy._id }
     else
       p There are no copies of this book in the library.
     hr

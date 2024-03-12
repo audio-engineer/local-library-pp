@@ -21,30 +21,30 @@ html(lang="en")
       .row
         nav.navbar.bg-success-subtle
           .container-fluid
-            a.navbar-brand(href="/catalog") Local Library ++
+            a.navbar-brand(href="/") Local Library ++
       .row
         .col-sm-2.bg-primary-subtle
           block sidebar
             ul.nav.nav-pills.flex-column.mb-auto
               li.nav-item
-                a.nav-link(href="/catalog") Home
+                a.nav-link(href="/") Home
               li.nav-item
-                a.nav-link(href="/catalog/book") Books
+                a.nav-link(href="/books") Books
               li.nav-item
-                a.nav-link(href="/catalog/author") Authors
+                a.nav-link(href="/authors") Authors
               li.nav-item
-                a.nav-link(href="/catalog/genre") Genres
+                a.nav-link(href="/genres") Genres
               li.nav-item
-                a.nav-link(href="/catalog/book-instance") Book Copies
+                a.nav-link(href="/copies") Book Copies
               li.nav-item
                 hr
               li.nav-item
-                a.nav-link(href="/catalog/author/create") Add New Author
+                a.nav-link(href="/authors/create") Add New Author
               li.nav-item
-                a.nav-link(href="/catalog/genre/create") Add New Genre
+                a.nav-link(href="/genres/create") Add New Genre
               li.nav-item
-                a.nav-link(href="/catalog/book/create") Add New Book
+                a.nav-link(href="/books/create") Add New Book
               li.nav-item
-                a.nav-link(href="/catalog/book-instance/create") Add New Book Copy
+                a.nav-link(href="/copies/create") Add New Book Copy
         .col-sm-10
           block content

@@ -12,13 +12,13 @@ block content
           th Due Back
       tbody
       each copy in bookInstanceList
-        tr(class=bookInstance.availability)
+        tr(class=copy.availability)
           td
-            a(href=bookInstance.url) #{ bookInstance.book.title }
-          td #{ bookInstance.imprint }
-          td #{ bookInstance.status }
+            a(href=copy.url) #{ copy.book.title }
+          td #{ copy.imprint }
+          td #{ copy.status }
           td
-            if 'Loaned' === bookInstance.status
-              span #{ bookInstance.dueBackLocaleString }
+            if 'Loaned' === copy.status
+              span #{ copy.dueBackLocaleString }
   else
     p There are no book copies in this library.

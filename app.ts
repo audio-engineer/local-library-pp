@@ -5,8 +5,15 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import indexRouter from "@/routes/index.js";
-import userRouter from "@/routes/user.js";
-import catalogRouter from "@/routes/catalog.js";
+import booksRouter from "@/routes/books.js";
+import usersRouter from "@/routes/users.js";
+import authorsRouter from "@/routes/authors.js";
+import copiesRouter from "@/routes/copies.js";
+import genresRouter from "@/routes/genres.js";
+import booksApiRouter from "@/routes/api/books.js";
+import authorsApiRouter from "@/routes/api/api-router.js";
+import genresApiRouter from "@/routes/api/genres.js";
+import copiesApiRouter from "@/routes/api/copies.js";
 import compression from "compression";
 import helmet from "helmet";
 import mongoose from "mongoose";
@@ -21,12 +28,12 @@ dotenv.config();
 
 const app: Express = express();
 
+const secondsInMinute = 60;
 const millisecondsInSeconds = 1000;
-const amountOfSeconds = 20;
 
 const limiter = RateLimit({
-  windowMs: amountOfSeconds * millisecondsInSeconds,
-  limit: 10,
+  windowMs: 15 * secondsInMinute * millisecondsInSeconds,
+  limit: 100,
 });
 app.use(limiter);
 
@@ -67,8 +74,15 @@ app.use(compression());
 app.use(express.static(path.join(import.meta.dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", userRouter);
-app.use("/catalog", catalogRouter);
+app.use("/v1", authorsApiRouter);
+app.use("/v1", booksApiRouter);
+app.use("/v1", copiesApiRouter);
+app.use("/v1", genresApiRouter);
+app.use("/authors", authorsRouter);
+app.use("/books", booksRouter);
+app.use("/copies", copiesRouter);
+app.use("/genres", genresRouter);
+app.use("/users", usersRouter);
 
 app.use(
   (req: Readonly<Request>, res: Readonly<Response>, next: NextFunction) => {

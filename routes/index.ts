@@ -1,9 +1,8 @@
-import type { Request, Response } from "express";
 import { Router } from "express";
+import { index } from "@/controllers/index.js";
 
-export default Router().get(
-  "/",
-  (req: Readonly<Request>, res: Readonly<Response>) => {
-    res.redirect("/catalog");
-  },
-);
+const router = Router();
+
+router.get("/", index);
+
+export default router;

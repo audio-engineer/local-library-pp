@@ -2,9 +2,9 @@ extends ../layout
 
 block content
   h1= title
-  if bookList.length
+  if books.length
     ul
-      each book in bookList
+      each book in books
         li
           a(href=book.url) #{ book.title }
           |
