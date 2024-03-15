@@ -4,8 +4,13 @@ mixin table(columns, rows)
     thead
       tr
       each column in columns
-        th #{ column.name }
+        th #{ column }
     tbody
     each row in rows
       tr
-        td #{ row.data }
+      each cell in row
+        if cell.url
+          td
+            a(href=cell.url) #{ cell.data }
+        else
+          td #{ cell.data }

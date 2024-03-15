@@ -10,6 +10,7 @@ services:
       - ./:/home/node/app/
     ports:
       - 3000:3000
+      - 9229:9229
   mongo:
     image: mongo:latest
     restart: always

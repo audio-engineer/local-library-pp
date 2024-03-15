@@ -71,7 +71,7 @@ db.books.insertMany([
       "a younger age than most people are allowed in. I tread paths by moonlight that others fear to speak of during " +
       "day. I have talked to Gods, loved women, and written songs that make the minstrels weep.",
     isbn: "9781473211896",
-    genre: [db.genres.findOne({ name: "Fantasy" })._id],
+    genres: [db.genres.findOne({ name: "Fantasy" })._id],
   },
   {
     title: "The Wise Man's Fear (The Kingkiller Chronicle, #2)",
@@ -81,7 +81,7 @@ db.books.insertMany([
       "courtship, adventure, love and magic... and further along the path that has turned Kvothe, the mightiest " +
       "magician of his age, a legend in his own time, into Kote, the unassuming pub landlord.",
     isbn: "9788401352836",
-    genre: [db.genres.findOne({ name: "Fantasy" })._id],
+    genres: [db.genres.findOne({ name: "Fantasy" })._id],
   },
   {
     title: "The Slow Regard of Silent Things (Kingkiller Chronicle)",
@@ -91,7 +91,7 @@ db.books.insertMany([
       "and abandoned rooms. A young woman lives there, tucked among the sprawling tunnels of the Underthing, snug in " +
       "the heart of this forgotten place.",
     isbn: "9780756411336",
-    genre: [db.genres.findOne({ name: "Fantasy" })._id],
+    genres: [db.genres.findOne({ name: "Fantasy" })._id],
   },
   {
     title: "Apes and Angels",
@@ -101,7 +101,7 @@ db.books.insertMany([
       "the stars in a desperate crusade to save intelligent life wherever they found it. A wave of death is " +
       "spreading through the Milky Way galaxy, an expanding sphere of lethal gamma ...",
     isbn: "9780765379528",
-    genre: [db.genres.findOne({ name: "Science Fiction" })._id],
+    genres: [db.genres.findOne({ name: "Science Fiction" })._id],
   },
   {
     title: "Death Wave",
@@ -113,14 +113,14 @@ db.books.insertMany([
       "radiation, expanding out from the core toward Earth. Unless the human race acts to save itself, all life on " +
       "Earth will be wiped out...",
     isbn: "9780765379504",
-    genre: [db.genres.findOne({ name: "Science Fiction" })._id],
+    genres: [db.genres.findOne({ name: "Science Fiction" })._id],
   },
   {
     title: "Test Book 1",
     author: db.authors.findOne({ lastName: "Jones" })._id,
     summary: "Summary of test book 1",
     isbn: "ISBN111111",
-    genre: [
+    genres: [
       db.genres.findOne({ name: "Fantasy" })._id,
       db.genres.findOne({ name: "Science Fiction" })._id,
     ],
@@ -130,7 +130,7 @@ db.books.insertMany([
     author: db.authors.findOne({ lastName: "Jones" })._id,
     summary: "Summary of test book 2",
     isbn: "ISBN222222",
-    genre: null,
+    genres: null,
   },
 ]);
 

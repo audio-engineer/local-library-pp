@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  h1 Book Copies
+  if bookInstanceList.length
+    table.table.table-hover
+      thead
+        tr
+          th Title
+          th Imprint
+          th Status
+          th Due Back
+      tbody
+      each copy in bookInstanceList
+        tr(class=copy.availability)
+          td
+            a(href=copy.url) #{ copy.book.title }
+          td #{ copy.imprint }
+          td #{ copy.status }
+          td
+            if 'Loaned' === copy.status
+              span #{ copy.dueBackLocaleString }
+  else
+    p There are no book copies in this library.

@@ -1,13 +1,9 @@
 extends ../layout
+include ../mixins/table
 
 block content
-  if authorList.length
-    ul
-      each author in authorList
-        li
-          a(href=author.url) #{ author.fullName }
-          |
-          | (#{ author.lifeSpan })
-
+  h1 Authors
+  if rows.length
+    +table(['Name', 'Lifespan'], rows)
   else
     p There are no authors.

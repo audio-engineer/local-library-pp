@@ -1,13 +1,8 @@
 {
+  "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "module": "nodenext",
-    "outDir": "./dist",
-    "strict": true,
-    "verbatimModuleSyntax": true,
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "outDir": "dist",
+    "verbatimModuleSyntax": true
   },
-  "include": ["**/*.ts"],
   "exclude": ["./node_modules/"]
 }

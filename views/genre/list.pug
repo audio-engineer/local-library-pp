@@ -1,13 +1,9 @@
 extends ../layout
+include ../mixins/table
 
 block content
-  h1= title
-
-  if listGenres.length
-    ul
-      each val in listGenres
-        li
-          a(href=val.url) #{ val.name }
-
+  h1 Genres
+  if rows.length
+    +table(['Name'], rows)
   else
     p There are no genres.

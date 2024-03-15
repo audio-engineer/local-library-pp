@@ -4,10 +4,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx nodemon -e ts,pug -x tsx ./bin/www",
-    "dev-2": "node --loader ts-node/esm ./bin/www",
-    "build": "npx tsc",
-    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
+    "dev": "nodemon --inspect=0.0.0.0 -e ts -x tsx src/bin/www.ts",
+    "lint": "eslint .",
+    "prettier": "prettier -c **/*.{js,ts,css,json,pug,yaml,md}",
+    "build": "tsc && mkdir -p dist/views/ && mkdir -p dist/public/ && cp -r views/* dist/views/ && cp -r public/* dist/public/",
+    "start": "NODE_ENV=production node dist/bin/www.js"
   },
   "dependencies": {
     "compression": "^1.7.4",
@@ -30,8 +31,10 @@
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^3.0.0",
+    "@tsconfig/node20": "^20.1.2",
     "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.7",
+    "@types/debug": "^4.1.12",
     "@types/express": "^4.17.21",
     "@types/luxon": "^3.4.2",
     "@types/morgan": "^1.9.9",
@@ -41,7 +44,6 @@
     "eslint-plugin-tsdoc": "^0.2.17",
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
-    "ts-node": "^10.9.2",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2",
     "typescript-eslint": "^7.1.1"
