@@ -1,0 +1,9 @@
+extends ../layout
+include ../mixins/table
+
+block content
+  h1 Authors
+  if rows.length
+    +table(['Name', 'Lifespan'], rows)
+  else
+    p There are no authors.

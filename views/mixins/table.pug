@@ -1,0 +1,16 @@
+mixin table(columns, rows)
+  if columns.length && rows.length
+  table.table.table-hover
+    thead
+      tr
+      each column in columns
+        th #{ column }
+    tbody
+    each row in rows
+      tr
+      each cell in row
+        if cell.url
+          td
+            a(href=cell.url) #{ cell.data }
+        else
+          td #{ cell.data }

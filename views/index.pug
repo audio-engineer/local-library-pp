@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 Home
+  p Welcome to #[em LocalLibrary++], a very basic Express website inspired by the&nbsp;
+    a(
+      href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Tutorial_local_library_website"
+    ) Mozilla Express Tutorial
+  h3 Stats
+  p The library has the following record counts:
+  ul
+    li #[strong Books:] !{ numberOfBooks }
+    li #[strong Copies:] !{ numberOfCopies }
+    li #[strong Copies available:] !{ bookInstanceAvailableCount }
+    li #[strong Authors:] !{ authorCount }
+    li #[strong Genres:] !{ genreCount }

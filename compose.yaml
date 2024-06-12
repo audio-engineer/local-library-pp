@@ -1,0 +1,50 @@
+services:
+  server:
+    image: node:20-alpine
+    user: node
+    working_dir: /home/node/app/
+    environment:
+      - NODE_ENV=development
+    tty: true
+    volumes:
+      - ./:/home/node/app/
+    ports:
+      - 3000:3000
+      - 9229:9229
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: local_library_pp
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-db:/data/db/
+      - mongo-configdb:/data/configdb/
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: root
+      ME_CONFIG_BASICAUTH_PASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_DATABASE: local_library_pp
+      MARIADB_ROOT_PASSWORD: example
+    volumes:
+      - mariadb:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d/mariadb-init.sql:/docker-entrypoint-initdb.d/mongo-init.sql
+volumes:
+  mongo-db:
+  mongo-configdb:
+  mariadb:

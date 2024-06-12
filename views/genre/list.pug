@@ -1,0 +1,9 @@
+extends ../layout
+include ../mixins/table
+
+block content
+  h1 Genres
+  if rows.length
+    +table(['Name'], rows)
+  else
+    p There are no genres.

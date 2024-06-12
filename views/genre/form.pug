@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h1 Update Genre
+  form(method="POST")
+    .mb-3
+      label.form-label(for="name") Genre:
+      input#name.form-control(
+        type="text",
+        placeholder="Fantasy, Poetry etc.",
+        name="name",
+        required,
+        value=undefined === genre ? "" : genre.name
+      )
+    if errors
+      .mb-3
+      each error in errors
+        div #{ error.msg }
+    button.btn.btn-primary(type="submit") Submit
